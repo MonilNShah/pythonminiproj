@@ -1,6 +1,15 @@
- {% comment %} {% extends "base_lib.html" %} {% endcomment %}
+ {% comment %} {% extends "main_base.html" %} {% endcomment %}
  {% load static %}
- {% load staticfiles %}
+ <section class="contact" id="takeapoint">
+        <div class="container">
+          <div class="row">
+            <div class="contact-caption clearfix">
+              <div class="contact-heading text-center">
+                <h2>Take Appointment</h2>
+              </div>
+              <div class="col-md-5 contact-info text-left">
+                <h3>Take Appointment</h3>
+                  {% block content %}
 
 <form method="post" id="personForm" data-cities-url="{% url 'ajax_load_slots' %}" novalidate>
     {% csrf_token %}
@@ -30,3 +39,12 @@
 
     });
   </script>
+
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

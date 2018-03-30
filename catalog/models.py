@@ -17,7 +17,7 @@ class Patient(models.Model):
 
     def __str__(self):
         full_name=self.First_Name+self.Middle_Name+self.Last_Name
-        return self.first_name
+        return self.First_Name
 
 
 class Doctor(models.Model):

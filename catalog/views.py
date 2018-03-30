@@ -14,7 +14,7 @@ class BookListView(generic.ListView):
     template_name = 'book.html'  # Specify your own template name/location'''
 
 
-def index(request):
+'''def index(request):
     """
     View function for home page of site.
     """
@@ -37,7 +37,29 @@ def index(request):
         'index.html',
         context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors ,'book':book,'author':author}
     )
-
+'''
+def index(request):
+    a=15
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'main_base.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
 
 def takeapoint(request):
     registered=False

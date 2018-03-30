@@ -22,7 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^book/',views.index,name="index"),
+    url(r'book/$',views.index,name="index"),
     #path('books/', views.BookListView.as_view(), name='books'),
     # url(r'books/$', views.bookdetail, name='books'),
     # url(r'^(?P<pk>\d+)',views.book, name='bookdetail'),
@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'},name='login'),
     url(r'register/$',views.register, name='register'),
     # xurl(r'register2/$',views.register2,name='register2'),
-    url(r'logout/$',auth_views.logout,{'next_page': '/login'},name='logout'),
+    url(r'logout/$',auth_views.logout,{'next_page': '/book'},name='logout'),
     #url(r'logout/$',auth_views.LogoutView.as_view(template_name='logout.html')),
     url(r'password_change/$',auth_views.PasswordChangeView.as_view(template_name='registration\password_change.html',success_url='/password_change_done')),
     url(r'password_change_done/',auth_views.PasswordChangeDoneView.as_view(template_name='registration\password_change_done.html')),
