@@ -44,10 +44,8 @@ h2 {
     margin: auto;
 }
 .top-header img.logo {
-    margin-left: -40px;
-    margin-bottom: 20px;
-    margin-top: -20px;
-    size:10;
+    margin-bottom: 25px;
+    margin-top: -15px;
     transition: all .5s ease 0s;
     -webkit-transition: all .5s ease 0s;
     -moz-transition: all .5s ease 0s;
@@ -58,7 +56,7 @@ h2 {
     background-color: transparent;
     border-color: transparent;
     margin-bottom: 0;
-    margin-top: 6px;
+    margin-top: 8px;
     transition: all .5s ease 0s;
     -webkit-transition: all .5s ease 0s;
     -moz-transition: all .5s ease 0s;
@@ -66,7 +64,7 @@ h2 {
     -ms-transition: all .5s ease 0s;
 }
 .nav-bar {
-    margin-top: 28px;
+    margin-top: 29px;
 }
 .navbar-toggle span {
     color: #fff;
@@ -77,7 +75,6 @@ ul.nav {
 }
 
 .navbar-default .navbar-nav>li>a {
-    left: 50px;
     font-size: 20px;
     color: #737373;
     text-transform: uppercase;
@@ -86,7 +83,7 @@ ul.nav {
     -moz-transition: all .7s ease 0s;
     -o-transition: all .7s ease 0s;
     -ms-transition: all .7s ease 0s;
-    padding: 08px 08px;
+    padding: 12px 12px;
     font-weight: bold;
 }
 .navbar-default .navbar-nav>li>a:hover {
@@ -194,7 +191,7 @@ li a.active {
 .about h2 {
     font-size: 90px;
     color: #42b3e5;
-    margin-top: 80px;
+    margin-top: 50px;
 }
 .about h4 {
     font-size: 24px;
@@ -283,12 +280,12 @@ li a.active {
 /* Takeapoint*/
 .takeapoint {
     background-repeat: repeat-y;
-    margin-top: 10px;
+    margin-top: 40px;
 }
 .takeapoint h2 {
     font-size: 90px;
     color: #42b3e5;
-    margin-top: 100px;
+    margin-top: 50px;
     margin-bottom: 0;
 }
 .takeapoint h4 {
@@ -306,12 +303,12 @@ li a.active {
 .service {
     background: url(../img/pattern.jpg);
     background-repeat: repeat-y;
-    margin-top: 0px;
+    margin-top: 40px;
 }
 .service h2 {
     font-size: 90px;
     color: #fff;
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 0;
 }
 .service h4 {
@@ -698,18 +695,16 @@ body,
 /******************************
 responsive area
 ********************************/
-.glyphicon.glyphicon-user{
-    font-size: 15px;
-    right: 05px;
+.glyphicon.glyphicon-login {
+    font-size: 150px;
 }
 
-.glyphicon.glyphicon-log-in {
-    font-size: 15px;
-    right: 05px;
+.glyphicon.glyphicon-signup {
+    font-size: 150px;
 }
 /* md */
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1199px) {
     .navbar-default .navbar-nav>li {
         float:left;
     }
@@ -784,7 +779,7 @@ responsive area
 
 @media (min-width: 480px) and (max-width: 767px) {
     .header-logo img {
-        margin-top: 10px;
+        margin-top: 20px;
     }
     .navbar-default .navbar-nav>li>a {
         font-size: 20px;
@@ -873,7 +868,7 @@ responsive area
     .about h2 {
         font-size: 50px;
         color: #42b3e5;
-        margin-top: 40px;
+        margin-top: 30px;
     }
     .service h2 {
         font-size: 50px;
@@ -936,21 +931,31 @@ responsive area
     }
 }
 
-/*
-.navbar-nav {
+
+@media (max-width: 990px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
         width: 10%;
         float: none!important;
         margin: 7.5px -10px;
     }
-*/
-.navbar{
-    width:108% !important;
-    margin:0px auto;
-    left:0;
-    right:0;
-    padding:0;
-}
-.navbar-right
-{
-    right:0px;
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
 }

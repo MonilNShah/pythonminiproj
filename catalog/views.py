@@ -38,6 +38,121 @@ class BookListView(generic.ListView):
         context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors ,'book':book,'author':author}
     )
 '''
+def main_home(request):
+    return render(
+            request,
+            'indexnew.html',
+        )
+
+def home(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'home.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
+
+def service(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'services.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
+
+def contactus(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'contactus.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
+
+def team(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'team.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
+def aboutus(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'aboutus.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
+        )
+
 def index(request):
     a=15
     username=request.user
@@ -57,11 +172,52 @@ def index(request):
         print("Logged In User Is Doctor")
     return render(
             request,
-            'main_base.html',
+            'base_new.html',
             context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
         )
 
+def viewapoint(request):
+    a=15
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    current_date=datetime.datetime.now().date()
+    print(current_date)
+    allapoint=Appointment.objects.filter(Date=current_date)
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
+    return render(
+            request,
+            'viewapoint.html',
+            context={'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in,'allapoint':allapoint}
+        )
+
 def takeapoint(request):
+    username=request.user
+    print(username.id)
+    d=Doctor.objects.filter(u_id=username.id)
+    u=Patient.objects.filter(u_id=username.id)
+    print(d)
+    print(u)
+    print(username.id)
+    Doctor_logged_in=Doctor.objects.none()
+    Patient_logged_in=Patient.objects.none()
+    if u:
+        Patient_logged_in=u
+        print("Logged In user is Patient")
+    if d:
+        Doctor_logged_in=d
+        print("Logged In User Is Doctor")
     registered=False
     apoint=apointForm()
     slots=Slots.objects.none()
@@ -121,7 +277,7 @@ def takeapoint(request):
         return render(
             request,
             'apoint.html',
-            context={'slots_time':slots_time,'apoint':apoint,'doctors':doctors}
+            context={'slots_time':slots_time,'apoint':apoint,'doctors':doctors,'Doctor_logged_in':Doctor_logged_in,'Patient_logged_in':Patient_logged_in}
     )
 
 

@@ -22,14 +22,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'book/$',views.index,name="index"),
+    url(r'book/$',views.main_home,name="main_home"),
     #path('books/', views.BookListView.as_view(), name='books'),
     # url(r'books/$', views.bookdetail, name='books'),
     # url(r'^(?P<pk>\d+)',views.book, name='bookdetail'),
     # url(r'^(?P<pk>\w+)',views.author, name='authordetial'),
     #url(r'^catalog/books',views.book,name="book"),
     # url(r'authors/',views.author,name="author"),
+    url(r'home/$',views.home,name="home"),
+    url(r'aboutus/$',views.aboutus,name="aboutus"),
+    url(r'team/$',views.team,name="team"),
+    url(r'service$',views.service,name="service"),
+    url(r'contactus/$',views.contactus,name="contact"),
+    url(r'team/$',views.team,name="team"),
     url(r'^takeapoint/$',views.takeapoint,name='takeapoint'),
+    url(r'^viewapoint/$',views.viewapoint,name='viewapoint'),
+
     url(r'^ajax/slots/$', views.load_slots, name='ajax_load_slots'),
     url(r'^ajax/finalslots/$', views.load_finalslots, name='ajax_load_finalslots'),
     url(r'^login/$', auth_views.login, {'template_name': 'login.html'},name='login'),

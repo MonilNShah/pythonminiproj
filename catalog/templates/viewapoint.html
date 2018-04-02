@@ -2,11 +2,15 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <!--===============================================================================================-->  
     <meta name="description" content="">
     <!--===============================================================================================-->  
@@ -67,13 +71,13 @@
                   <li><a class="menu" href="{% url 'team' %}">Our Team</a></li>
                   {% if user.is_authenticated %}
                     {% if Patient_logged_in %}
-                       <li><a class="menu active" href="{% url 'takeapoint' %}"> Take Appointment</a></li>
+                       <li><a class="menu" href="{% url 'takeapoint' %}"> Take Appointment</a></li>
                        <li><a class="menu" href="{% url 'takeapoint' %}"> Cancel Appointment</a></li>
                        <li><a class="menu" href="#history"> History</a></li>
                     {% endif %}
                     {% if Doctor_logged_in %}
                        <li><a class="menu" href="#givemed">Give Medicine</a></li>
-                        <li><a class="menu" href="#viewappoint">View Appointment</a></li>
+                        <li><a class="menu active" href="{% url 'viewapoint'%}">View Appointment</a></li>
                     {% endif %}
                     <li><a class="menu" href="{% url 'contact' %}"> Contact Us</a></li>
                   </ul>
@@ -100,14 +104,65 @@
     </div>
   </header> <!-- end of header area -->
 
-  <section class="takeapoint text-center" id="takeapoint">
+  <section class="takeapoint text-center" id="">
     <div class="container">
       <div class="row">
         <!-- <div class="contact-caption clearfix"> -->
           <!-- <div class="contact-heading text-center"> -->
-        <h2>Take Apoint</h2>
+        <h2>View Apoint</h2>
+      </div>
+     <div class="table-responsive">          
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Firstname</th>
+              <th>Lastname</th>
+              <th>Age</th>
+              <th>City</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Anna</td>
+              <td>Pitt</td>
+              <td>35</td>
+              <td>New York</td>
+              <td>USA</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
   
-    <!-- 
+    
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_doctor_name").change(function () {
+      var url = $("#Appoint_form").attr("data-slots-url");  // get the url of the `load_cities` view
+      var doctor_name = $(this).val();  // get the selected country ID from the HTML input
+      var date=$("#id_date").val();
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'doctor_name': doctor_name ,'date':date     // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_slot").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+
+    });
+
+  </script>
+</div>
+</div>
+</section>
+
+
+<!-- 
       2nd Option 
       Not appropriate Form to be displayed
   <form class="login100-form validate-form" name="Appoint_form"  id="Appoint_form" method="post" data-slots-url="{% url 'ajax_load_slots' %}"  data-date-url="{% url 'ajax_load_finalslots' %}" novalidate>
@@ -159,81 +214,3 @@
   </form>
     2 nd Form Ends herex    
     -->
-
-
-  <form name="Appoint_form"  id="Appoint_form" method="post" data-slots-url="{% url 'ajax_load_slots' %}"  data-date-url="{% url 'ajax_load_finalslots' %}" novalidate>
-    {% csrf_token %}
-    {{ apoint.non_field_errors }}
-      <div class="form-group row">
-        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Date</label>
-        <div class="col-sm-2">
-          <input type="date" class="form-control form-control-sm" id="id_date" name="date" for="{{ apoint.date.id_for_label }} placeholder="Enter Appointment Date">
-          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-    </div>
-      <div class="form-group row">
-        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Doctor</label>
-        <div class="col-sm-2">
-        <select class="form-control" id="id_doctor_name" name="doctor_name" for="{{ apoint.doctor_name.id_for_label }}">
-          <option value=" ">------</option>
-          {%for doc in doctors%}
-              <option value="{{doc}}">{{doc}}</option>
-          {%endfor%} 
-        </select>
-      </div>
-      </div>
-      <div class="form-group row">
-        <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm">Slot</label>
-        <div class="col-sm-2">
-        <select class="form-control" id="id_slot" name="slot" for="{{ apoint.slot.id_for_label }}">
-          <option value=" ">------</option>
-              {%for slot_time in slots_time %}
-                 <option value="{{slot_time}}">{{slot_time}}</option>
-              {%endfor%} 
-        </select>
-      </div>
-      </div>
-      <div class="col-sm-5">
-      <button type="submit" class="btn btn-primary">Take Appointment</button>
-    </div>
-</form>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
-    $("#id_doctor_name").change(function () {
-      var url = $("#Appoint_form").attr("data-slots-url");  // get the url of the `load_cities` view
-      var doctor_name = $(this).val();  // get the selected country ID from the HTML input
-      var date=$("#id_date").val();
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'doctor_name': doctor_name ,'date':date     // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_slot").html(data);  // replace the contents of the city input with the data that came from the server
-        }
-      });
-
-    });
-
-    $("#id_date").change(function () {
-      var url = $("#Appoint_form").attr("data-date-url");  // get the url of the `load_cities` view
-      var  date= $(this).val();  // get the selected country ID from the HTML input
-      var doctor_name=$("#id_doctor_name").val();
-      $.ajax({                       // initialize an AJAX request
-        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
-        data: {
-          'doctor_name': doctor_name ,'date':date     // add the country id to the GET parameters
-        },
-        success: function (data) {   // `data` is the return of the `load_cities` view function
-          $("#id_slot").html(data);  // replace the contents of the city input with the data that came from the server
-        }
-      });
-
-    });
-
-
-  </script>
-</div>
-</div>
-</section>
